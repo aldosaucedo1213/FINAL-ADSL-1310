@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Editar Venta</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarVenta/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid_venta" name="txtid_venta" class="form-control" value="{{ misventas.id_venta }}" minLength="6" maxLength="6" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_producto" name="txtid_producto" class="form-control" value="{{ misventas.id_producto }}" maxLength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_cliente" name="txtid_cliente" class="form-control" value="{{ misventas.id_cliente }}" maxLength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtmetodo_pago" name="txtmetodo_pago" class="form-control" value="{{ misventas.metodo_pago }}" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtfecha" name="txtfecha" class="form-control" value="{{ misventas.fecha }}" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_empleado" name="txtid_empleado" class="form-control" value="{{ misventas.id_empleado }}" maxLength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txttotal" name="txttotal" class="form-control" value="{{ misventas.total }}" maxLength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-warning">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

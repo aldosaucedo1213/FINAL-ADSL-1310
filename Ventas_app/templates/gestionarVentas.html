@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Registrar Venta</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarVenta/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid_venta" name="txtid_venta" class="form-control" placeholder="ID de Venta" minLength="6" maxLength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_producto" name="txtid_producto" class="form-control" placeholder="ID de Producto" maxLength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_cliente" name="txtid_cliente" class="form-control" placeholder="ID de Cliente" maxLength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtmetodo_pago" name="txtmetodo_pago" class="form-control" placeholder="Método de Pago" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtfecha" name="txtfecha" class="form-control" placeholder="Fecha" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtid_empleado" name="txtid_empleado" class="form-control" placeholder="ID de Empleado" maxLength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txttotal" name="txttotal" class="form-control" placeholder="Total" maxLength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1>Listado de Ventas</h1>
+        <img src="{% static "img/local.jpg" %}" alt="alexis" width="300" height="300">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID Venta</th>
+                        <th scope="col">ID Producto</th>
+                        <th scope="col">ID Cliente</th>
+                        <th scope="col">Método de Pago</th>
+                        <th scope="col">Fecha</th>
+                        <th scope="col">ID Empleado</th>
+                        <th scope="col">Total</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in misventas %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ m.id_venta }}</td>
+                        <td>{{ m.id_producto }}</td>
+                        <td>{{ m.id_cliente }}</td>
+                        <td>{{ m.metodo_pago }}</td>
+                        <td>{{ m.fecha }}</td>
+                        <td>{{ m.id_empleado }}</td>
+                        <td>{{ m.total }}</td>
+                        <td><a href="seleccionarVenta/{{ m.id_venta }}" class="btn btn-info">Editar</a></td>
+                        <td><a href="borrarVenta/{{ m.id_venta }}" class="btn btn-danger">Borrar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
