@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-md-4 offset-md-4">
+        <h1>Editar Sucursal</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/editarSucursal/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid_sucursal" name="txtid_sucursal" class="form-control" value="{{ missucursales.id_sucursal }}" minLength="6" maxLength="6" readonly required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" value="{{ missucursales.nombre }}" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" value="{{ missucursales.direccion }}" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txttelefono" name="txttelefono" class="form-control" value="{{ missucursales.telefono }}" maxLength="15" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txthorario" name="txthorario" class="form-control" value="{{ missucursales.horario }}" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtgerente" name="txtgerente" class="form-control" value="{{ missucursales.gerente }}" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtadministrador" name="txtadministrador" class="form-control" value="{{ missucursales.administrador }}" maxLength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-warning">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

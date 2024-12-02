@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block cuerpo %}
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Registrar Sucursal</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="/registrarSucursal/" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid_sucursal" name="txtid_sucursal" class="form-control" placeholder="ID" minLength="6" maxLength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="Dirección" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txttelefono" name="txttelefono" class="form-control" placeholder="Teléfono" maxLength="15" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txthorario" name="txthorario" class="form-control" placeholder="Horario" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtgerente" name="txtgerente" class="form-control" placeholder="Gerente" maxLength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtadministrador" name="txtadministrador" class="form-control" placeholder="Administrador" maxLength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-8 col-lg-8 col-xl-8">
+        <h1>Listado de Sucursales</h1>
+        <img src="{% static "img/local.jpg" %}" alt="alexis" width="300" height="300">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Horario</th>
+                        <th scope="col">Gerente</th>
+                        <th scope="col">Administrador</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in missucursales %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ m.id_sucursal }}</td>
+                        <td>{{ m.nombre }}</td>
+                        <td>{{ m.direccion }}</td>
+                        <td>{{ m.telefono }}</td>
+                        <td>{{ m.horario }}</td>
+                        <td>{{ m.gerente }}</td>
+                        <td>{{ m.administrador }}</td>
+                        <td><a href="seleccionarSucursal/{{ m.id_sucursal }}" class="btn btn-info">Editar</a></td>
+                        <td><a href="borrarSucursal/{{ m.id_sucursal }}" class="btn btn-danger">Borrar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
