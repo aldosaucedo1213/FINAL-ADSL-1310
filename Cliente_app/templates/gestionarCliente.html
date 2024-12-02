@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block cuerpo %}
+<div class="row">
+    <div class="col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h1>Gestionar Clientes</h1>
+        <div class="card">
+            <div class="card-body">
+                <form action="{% url 'registrarCliente' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtid_cliente" name="txtid_cliente" class="form-control" placeholder="ID Cliente" maxlength="6" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtnombre" name="txtnombre" class="form-control" placeholder="Nombre" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="numtelefono" name="numtelefono" class="form-control" placeholder="Teléfono" maxlength="15" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="txtemail" name="txtemail" class="form-control" placeholder="Correo Electrónico" maxlength="254" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtdireccion" name="txtdireccion" class="form-control" placeholder="Dirección" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txttipo_cliente" name="txttipo_cliente" class="form-control" placeholder="Tipo de Cliente" maxlength="100" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" id="txtmetodo_pago" name="txtmetodo_pago" class="form-control" placeholder="Método de Pago" maxlength="100" required>
+                    </div>
+                    <div class="form-group py-2">
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-12 col-md-4 col-lg-8 col-xl-8">
+        <h1>Listado de Clientes</h1>
+        <img src="{% static "img/local.jpg" %}" alt="alexis" width="300" height="300">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">ID Cliente</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Correo Electrónico</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Tipo de Cliente</th>
+                        <th scope="col">Método de Pago</th>
+                        <th colspan="2">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cliente in misclientes %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ cliente.id_cliente }}</td>
+                        <td>{{ cliente.nombre }}</td>
+                        <td>{{ cliente.correo_electronico }}</td>
+                        <td>{{ cliente.telefono }}</td>
+                        <td>{{ cliente.tipo_cliente }}</td>
+                        <td>{{ cliente.metodo_de_pago }}</td>
+                        <td><a href="{% url 'editarCliente' cliente.id_cliente %}" class="btn btn-info">Editar</a></td>
+                        <td><a href="{% url 'borrarCliente' cliente.id_cliente %}" class="btn btn-danger">Borrar</a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}
